@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: chartreuse;
+}
+
+input {
+    width: 100%;
+    margin: 8px 0 8px 0;
+    padding: 5px 5px 5px 5px;
+    font-weight: bolder;
+}
+
+h1 {
+    font-size: 22px;
+    letter-spacing: 2.2px;
+}
+
+h3 {
+    padding: 5px 0 5px 0;
+}
+
+.main {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 40px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.hide {
+    display: none;
+}
+
+.unhide {
+    display: block;
+}
+
+.chat-div {
+    width: 100%;
+    height: 350px;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightgrey;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-wrap: break-word;
+    
+}
+
+.btn {
+    color: white;
+    font-weight: bolder;
+    padding: 5px;
+    width: 75px;
+    color: black;
+    background-color: chartreuse;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 1.4px;
+}
+
+.return {
+    color: black;
+}
+

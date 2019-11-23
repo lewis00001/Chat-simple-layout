@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chatter-Chat</title>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!-- Firebase References -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1 class="main-title">Chatter-Chat</h1>
+        <hr>
+        <div class="container-1 screen unhide">    
+            <!-- username setup -->
+            <h3 class="name-enter-prompt">Enter your username below:</h3>
+            <input class="username-input" placeholder="username"></input>
+            <div class="username-button btn">Submit</div>
+        </div>
+        <div class="container-2 screen hide">
+            <h3 class="greeting"></h3>
+            <!-- chats appear here -->
+            <div class="chat-div">
+                <div class="chat-output"></div>
+            </div>
+            <!-- chats entered here -->
+            <div class="chat-enter">
+                <input class="chat-input" placeholder="chat"></input>
+                <div class="enter-chat-button btn">Submit</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
