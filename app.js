@@ -20,7 +20,8 @@ $(document).ready(function () {
     // grabs data - listens for changes to data
     db.ref("chat/").on("child_added", function (snapshot) {
         let dataOutput = "<div class='return'><hr>" +
-            "<p class='name'>" + snapshot.child("name").val() + "</p>" +
+            "<p class='name' style='color:" + snapshot.child("color").val() + "'>" + 
+                snapshot.child("name").val() + "</p>" +
             "<p class='message'>" + snapshot.child("message").val() + "</p>" +
             "</div>";
         $(".chat-output").html($(".chat-output").html() + dataOutput);
@@ -29,18 +30,14 @@ $(document).ready(function () {
     let username = "";
     // click to get username
     $(".username-button").on("click", function (event) {
-        $(".screen").toggleClass("hide unhide");
-        setUsername();
-    });
-
-    function setUsername() {
         if ($(".username-input").val().trim() === "") {
             $(".name-enter-prompt").text("Please enter a valid username");
         } else {
             username = $(".username-input").val().trim();
+            $(".screen").toggleClass("hide unhide");
             $(".greeting").html("<h3>Greetings " + username + "!</h3>");
         }
-    }
+    });
 
     // click to send a chat
     $(".enter-chat-button").on("click", function (event) {
@@ -53,6 +50,7 @@ $(document).ready(function () {
             sendChatter();
         }
     });
+
     // listen for enterkey - send chat
     $(document).on("keydown", function (event) {
         let primed = $(".chat-input").val().trim();
@@ -66,7 +64,8 @@ $(document).ready(function () {
         // sent chat to db
         db.ref("chat/" + Date.now()).set({
             name: username,
-            message: chatOut
+            message: chatOut,
+            color: colorValue
         });
         $(".chat-input").val("");
     }
@@ -77,5 +76,16 @@ $(document).ready(function () {
         db.ref("chat/").remove();
         // client side clear
         $(".chat-output").html("");
+    });
+
+    let colorValue = "black";
+    // process color selection
+    $(".color").on("click", function (event) {
+        // clears currently selected
+        $(".color").removeClass("color-selected");
+        // selects new 
+        $(this).addClass("color-selected");
+        // preps for db
+        colorValue = $(this).attr("value");
     });
 });
