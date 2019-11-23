@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     // grabs data - listens for changes to data
     db.ref("chat/").on("child_added", function (snapshot) {
-        let dataOutput = "<div class='return'>" +
+        let dataOutput = "<div class='return'><hr>" +
             "<p class='name'>" + snapshot.child("name").val() + "</p>" +
             "<p class='message'>" + snapshot.child("message").val() + "</p>" +
             "</div>";
@@ -29,14 +29,19 @@ $(document).ready(function () {
     let username = "";
     // click to get username
     $(".username-button").on("click", function (event) {
+        $(".screen").toggleClass("hide unhide");
+        setUsername();
+    });
+
+    function setUsername() {
         if ($(".username-input").val().trim() === "") {
             $(".name-enter-prompt").text("Please enter a valid username");
         } else {
             username = $(".username-input").val().trim();
-            $(".screen").toggleClass("hide unhide");
             $(".greeting").html("<h3>Greetings " + username + "!</h3>");
         }
-    });
+    }
+
     // click to send a chat
     $(".enter-chat-button").on("click", function (event) {
         if ($(".chat-input").val().trim() === "") {
@@ -45,13 +50,32 @@ $(document).ready(function () {
                 $(".enter-chat-button").text("Submit");
             }, 400);
         } else {
-            let chatOut = $(".chat-input").val().trim();
-            // sent chat to db
-            db.ref("chat/" + Date.now()).set({
-                name: username,
-                message: chatOut
-            });
-            $(".chat-input").val("");
+            sendChatter();
         }
+    });
+    // listen for enterkey - send chat
+    $(document).on("keydown", function (event) {
+        let primed = $(".chat-input").val().trim();
+        if (event.keyCode === 13 && primed !== "") {
+            sendChatter();
+        }
+    });
+
+    function sendChatter() {
+        let chatOut = $(".chat-input").val().trim();
+        // sent chat to db
+        db.ref("chat/" + Date.now()).set({
+            name: username,
+            message: chatOut
+        });
+        $(".chat-input").val("");
+    }
+
+    // clear out all chat content - user/server
+    $(".clear-button").on("click", function () {
+        // server side clear
+        db.ref("chat/").remove();
+        // client side clear
+        $(".chat-output").html("");
     });
 });

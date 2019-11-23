@@ -61,9 +61,25 @@ h3 {
     text-align: center;
     cursor: pointer;
     letter-spacing: 1.4px;
+    float: left;
 }
 
 .return {
     color: black;
 }
 
+.clear-button {
+    float: right;
+    padding: 5px;
+    color: black;
+    background-color: #444;
+    text-align: center;
+    cursor: pointer;
+}
+
+.name {
+    font-weight: bold;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 5px;
+}
